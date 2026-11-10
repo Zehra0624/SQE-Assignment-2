@@ -1,0 +1,165 @@
+SOFTWARE QUALITY ENGINEERING - ASSIGNMENT 2
+B3 - CONDITION COVERAGE AND MC/DC ANALYSIS
+
+1. OBJECTIVE
+
+The objective of B3 is to analyse the atomic conditions
+within the compound decision in registration_decision()
+and demonstrate Modified Condition/Decision Coverage
+(MC/DC).
+
+2. COMPOUND DECISION
+
+The following condition is analysed:
+
+if not 0 <= course.enrolled <= course.capacity or course.capacity < 1:
+
+It is decomposed into three atomic conditions:
+
+A = 0 <= course.enrolled
+B = course.enrolled <= course.capacity
+C = course.capacity < 1
+
+The compound decision is:
+
+D = NOT (A AND B) OR C
+
+3. TRUTH TABLE AND SHORT-CIRCUIT ANALYSIS
+
+T1:
+enrolled = 0, capacity = 5
+A = True
+B = True
+C = False
+D = False
+Result: No ValueError is raised.
+
+T2:
+enrolled = -1, capacity = 5
+A = False
+B = Not Evaluated
+C = Not Evaluated
+D = True
+Result: ValueError is raised.
+
+T3:
+enrolled = 0, capacity = 0
+A = True
+B = True
+C = True
+D = True
+Result: ValueError is raised.
+
+T4:
+enrolled = 6, capacity = 5
+A = True
+B = False
+C = Not Evaluated
+D = True
+Result: ValueError is raised.
+
+4. MC/DC TEST PAIRS
+
+Condition A:
+Compare T1 and T2.
+
+A changes from True to False.
+The decision changes from False to True.
+B remains logically True and C remains False.
+
+Therefore, A independently affects the decision.
+
+Condition B:
+Compare T1 and T4.
+
+B changes from True to False.
+The decision changes from False to True.
+A remains True and C is logically False.
+
+Therefore, B independently affects the decision.
+
+Condition C:
+Compare T1 and T3.
+
+C changes from False to True.
+The decision changes from False to True.
+A and B remain True.
+
+Therefore, C independently affects the decision.
+
+### Clarification: Logical Values and Runtime Evaluation
+
+For MC/DC analysis, a condition's logical Boolean value must be distinguished from whether Python actually evaluates that condition at runtime.
+
+The following table shows both:
+
+| Test | A logical value | A evaluated? | B logical value | B evaluated? | C logical value | C evaluated? | Decision D |
+|------|-----------------|--------------|-----------------|--------------|-----------------|--------------|------------|
+| T1 | True | Yes | True | Yes | False | Yes | False |
+| T2 | False | Yes | True | No | False | No | True |
+| T3 | True | Yes | True | Yes | True | Yes | True |
+| T4 | True | Yes | False | Yes | False | No | True |
+
+The logical values of conditions that are not evaluated can still be determined from the supplied input values. For example, in T2, B is logically True because -1 <= 5, and C is logically False because 5 < 1 is false. However, Python skips both evaluations because of short-circuit behaviour.
+
+The three selected MC/DC pairs satisfy the unique-cause independence requirement at the Boolean decision level:
+
+- T1 and T2: Only A changes logically; B and C retain their logical values.
+- T1 and T4: Only B changes logically; A and C retain their logical values.
+- T1 and T3: Only C changes; A and B retain their values.
+
+Thus, each atomic condition independently changes the overall decision outcome while the other conditions' logical values remain fixed. The table separately records which conditions Python actually evaluates.
+
+
+5. PYTHON SHORT-CIRCUIT EVALUATION
+
+Python evaluates the chained comparison from left to right.
+
+In T2, A is False. The chained comparison stops,
+so B is not evaluated. The OR expression also does
+not need to evaluate C because the left side is True.
+
+In T4, A is True and B is False. The NOT expression
+becomes True, so the OR expression short-circuits
+and C is not evaluated.
+
+In T1, A and B are True. The left side becomes False,
+so Python evaluates C.
+
+In T3, A and B are True, so Python evaluates C,
+which is True.
+
+6. OTHER DECISIONS IN THE FUNCTION
+
+The remaining decisions in registration_decision()
+include:
+
+D1: Outstanding dues are negative.
+D3: Outstanding dues exceed 1000.
+D4: Course is already registered.
+D5: Prerequisites are not satisfied.
+D6: Credit limit is exceeded.
+D7: Course enrollment is greater than capacity.
+
+Each decision has true and false outcomes considered
+in the basis-path and test analysis.
+
+The D7 true outcome is structurally unreachable through
+normal valid execution because the earlier capacity
+validation rejects enrollment greater than capacity.
+
+7. CONCLUSION
+
+The compound capacity-validation condition was
+decomposed into three atomic conditions.
+
+The truth table demonstrates the True, False and
+Not Evaluated outcomes resulting from Python's
+short-circuit evaluation.
+
+Three MC/DC pairs were identified to demonstrate
+the independent effect of conditions A, B and C.
+
+This analysis documents condition-level behaviour
+and complements the control-flow and basis-path
+analysis in B1.

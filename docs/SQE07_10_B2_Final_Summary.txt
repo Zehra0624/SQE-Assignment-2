@@ -1,0 +1,164 @@
+
+SOFTWARE QUALITY ENGINEERING - ASSIGNMENT 2
+B2 - FINAL WHITE-BOX TESTING SUMMARY
+
+1. OBJECTIVE
+
+The objective of white-box testing was to examine the internal
+structure of the Student Course Registration System, identify
+uncovered statements and branches, and improve structural
+coverage using additional targeted tests.
+
+2. INITIAL BLACK-BOX TESTING RESULTS
+
+The original black-box test suite was executed before adding
+the additional white-box tests.
+
+Total tests: 58
+Passed tests: 43
+Failed tests: 15
+
+Initial statement coverage:
+54 out of 57 statements = 94.74%
+
+Initial branch coverage:
+23 out of 26 branches = 88.46%
+
+Initial overall coverage: 92.77% (displayed as 93%)
+
+Uncovered statements: 3
+Uncovered statement lines: 46, 54 and 66
+
+Partially covered branches: 3
+
+3. ADDITIONAL WHITE-BOX TESTING
+
+Three additional tests were implemented in tests/test_whitebox.py.
+
+WB-01: test_dues_blocked_above_1000
+Target: The true outcome of the outstanding-dues decision
+in registration_decision().
+
+WB-02: test_waitlisted_student_added_once
+Target: The WAITLISTED handling branch in register_course(),
+where a student not already on the waitlist is appended.
+
+WB-03: test_waitlisted_student_not_added_twice
+Target: The duplicate-entry condition in register_course(),
+where an existing waitlist entry must not be added again.
+
+All three additional white-box tests passed.
+
+Important limitation:
+The two waitlist-handling tests use monkeypatch to simulate
+a WAITLISTED result from registration_decision(). This allows
+the waitlist-handling branches in register_course() to be
+tested even though the current implementation cannot naturally
+produce WAITLISTED through valid registration_decision() inputs.
+
+4. COMBINED TESTING RESULTS
+
+The original black-box tests and the additional white-box
+tests were executed together.
+
+Total tests: 61
+Passed tests: 46
+Failed tests: 15
+
+Combined statement coverage:
+56 out of 57 statements = 98.25%
+
+Combined branch coverage:
+25 out of 26 branches = 96.15%
+
+Combined overall coverage: 97.59% (displayed as 98%)
+
+Uncovered statements: 1
+Partially covered branches: 1
+
+5. INITIAL AND COMBINED COVERAGE COMPARISON
+
+Measure                  Initial          Combined
+---------------------------------------------------
+Statements covered      54/57            56/57
+Statement coverage      94.74%           98.25%
+Branches covered        23/26            25/26
+Branch coverage         88.46%           96.15%
+Overall coverage        92.77%           97.59%
+Uncovered statements    3                1
+Partial branches        3                1
+
+Statement coverage improved by 3.51 percentage points.
+
+Branch coverage improved by 7.69 percentage points.
+
+Overall coverage improved by approximately 4.82 percentage
+points, from 92.77% to 97.59%.
+
+Two previously uncovered statements and two previously
+uncovered branch outcomes became covered.
+
+6. REMAINING COVERAGE GAP
+
+The WAITLISTED return statement at line 54 remains uncovered.
+
+The current implementation validates that enrollment is
+between zero and course capacity before reaching the
+waitlist decision.
+
+However, the later waitlist condition checks whether
+enrollment is greater than capacity.
+
+This condition cannot be true after the earlier validation
+has succeeded.
+
+Consequently, this return statement is unreachable through
+normal valid execution with the current implementation.
+
+The remaining partially covered branch is associated with
+this unreachable decision outcome.
+
+7. FUNCTIONAL TEST FAILURES
+
+Fifteen black-box tests remained failed in the combined run.
+
+The failures revealed implementation defects involving:
+
+- Credit-limit boundary handling.
+- Prerequisite validation.
+- Outstanding-dues handling.
+- Full-course waitlisting.
+- Registration decision priority.
+- Course withdrawal updates.
+
+These failures were preserved as evidence. The original
+registration.py implementation was not modified during
+the initial coverage measurement and white-box testing phase.
+
+8. CONCLUSION
+
+White-box testing was performed using control-flow analysis,
+basis path analysis, condition analysis, and additional
+targeted pytest tests.
+
+Initial statement coverage was 94.74%, and initial branch
+coverage was 88.46%.
+
+After adding three white-box tests, statement coverage
+increased to 98.25%, and branch coverage increased to 96.15%.
+
+The combined test suite contained 61 tests, of which
+46 passed and 15 failed.
+
+The results demonstrate that additional structural tests
+improved coverage. However, high coverage does not guarantee
+functional correctness.
+
+The remaining uncovered WAITLISTED return statement and
+the outstanding functional failures were documented rather
+than hidden or artificially corrected.
+
+The original source code and legitimate test failures were
+preserved for subsequent defect investigation.
+
+END OF B2 FINAL SUMMARY

@@ -1,0 +1,57 @@
+
+WHITE-BOX TEST CASE MAPPING
+B2 AND B4 SUPPORTING DOCUMENTATION
+
+TEST 1
+Test ID: test_dues_blocked_above_1000
+
+Function: registration_decision()
+Target: DUES_BLOCK return statement (line 46).
+
+Purpose:
+Verifies that a student with outstanding dues of 1001
+receives the DUES_BLOCK registration decision.
+
+Coverage contribution:
+Exercises the dues-blocking return path.
+
+
+TEST 2
+Test ID: test_waitlisted_student_added_once
+
+Function: register_course()
+Target: Waitlist insertion condition and statement
+(lines 65-66).
+
+Purpose:
+Uses monkeypatch to simulate a WAITLISTED decision and
+verifies that the student is added to the waitlist once.
+
+Coverage contribution:
+Exercises the waitlist insertion path.
+
+
+TEST 3
+Test ID: test_waitlisted_student_not_added_twice
+
+Function: register_course()
+Target: Duplicate-prevention condition (line 65).
+
+Purpose:
+Uses monkeypatch to simulate a WAITLISTED decision when
+the student is already present in the waitlist.
+
+Coverage contribution:
+Exercises the branch that prevents duplicate waitlist entries.
+
+
+TEST EXECUTION RESULTS
+
+All three additional white-box tests passed.
+
+The tests exercise selected structural paths and conditions.
+The monkeypatch technique isolates waitlist handling from
+the existing registration_decision() implementation.
+
+These tests do not correct the underlying implementation
+defects or make the WAITLISTED decision naturally reachable.

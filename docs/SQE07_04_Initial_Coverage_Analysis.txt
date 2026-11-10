@@ -1,0 +1,72 @@
+
+B2 - INITIAL STATEMENT AND BRANCH COVERAGE ANALYSIS
+
+1. INITIAL COVERAGE RESULTS
+
+Total statements: 57
+Missed statements: 3
+Total branches: 26
+Partially covered branches: 3
+Overall coverage: 93%
+
+Black-box tests:
+Passed: 43
+Failed: 15
+Total: 58
+
+2. IDENTIFIED MISSED STATEMENTS
+
+Line 46:
+return "DUES_BLOCK"
+
+The dues-blocking return statement was not executed.
+The current implementation blocks registration only when
+outstanding dues are greater than 1000.
+
+Line 54:
+return "WAITLISTED"
+
+The waitlist return statement was not executed.
+The earlier capacity validation rejects enrollment greater
+than capacity, making this condition unreachable for valid input.
+
+Line 66:
+course.waitlist.append(student.student_id)
+
+The waitlist insertion statement was not executed.
+It depends on receiving a WAITLISTED decision, which the
+current implementation does not produce.
+
+3. INITIAL COVERAGE CONCLUSION
+
+The black-box tests achieved 93% overall coverage.
+However, three statements and three partial branch outcomes
+remain uncovered.
+
+The failed tests also revealed functional defects involving
+outstanding dues, prerequisite checking, credit limits,
+full-course registration, and course withdrawal.
+
+Additional white-box tests are required to investigate the
+remaining coverage gaps and exercise structural paths.
+
+The original source code is preserved for this initial
+coverage measurement.
+
+
+4. IDENTIFIED PARTIALLY COVERED BRANCHES
+
+The coverage details identified the following missing branch arcs:
+
+- [45, 46]: The branch leading to the DUES_BLOCK return
+  statement was not executed.
+
+- [53, 54]: The branch leading to the WAITLISTED return
+  statement was not executed.
+
+- [65, 66]: The branch leading to waitlist insertion
+  was not executed.
+
+These gaps indicate that the original black-box test suite
+did not exercise all relevant execution outcomes.
+
