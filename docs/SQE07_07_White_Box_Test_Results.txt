@@ -1,0 +1,12 @@
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.11.7, pytest-7.4.0, pluggy-1.7.0 -- /home/heiwaaito/anaconda3/bin/python
+cachedir: .pytest_cache
+rootdir: /home/heiwaaito/SQE-Assignment-2
+plugins: cov-7.1.0, anyio-4.2.0
+[1mcollecting ... [0mcollected 3 items
+
+tests/test_whitebox.py::test_dues_blocked_above_1000 [32mPASSED[0m[32m              [ 33%][0m
+tests/test_whitebox.py::test_waitlisted_student_added_once [32mPASSED[0m[32m        [ 66%][0m
+tests/test_whitebox.py::test_waitlisted_student_not_added_twice [32mPASSED[0m[32m   [100%][0m
+
+[32m============================== [32m[1m3 passed[0m[32m in 0.03s[0m[32m ===============================[0m

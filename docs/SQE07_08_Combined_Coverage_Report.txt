@@ -1,0 +1,282 @@
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[31mF[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[31mF[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m            [100%][0m
+=================================== FAILURES ===================================
+[31m[1m____________________________ test_ecp_positive_dues ____________________________[0m
+
+    [94mdef[39;49;00m [92mtest_ecp_positive_dues[39;49;00m():[90m[39;49;00m
+        student = Student(student_id=[33m"[39;49;00m[33mS01[39;49;00m[33m"[39;49;00m, outstanding_dues=[94m500[39;49;00m)[90m[39;49;00m
+        course = Course([33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m, [94m3[39;49;00m, [94m30[39;49;00m, [94m10[39;49;00m)[90m[39;49;00m
+    [90m[39;49;00m
+>       [94massert[39;49;00m registration_decision(student, course) == [33m"[39;49;00m[33mDUES_BLOCK[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'[0m
+[1m[31mE         - DUES_BLOCK[0m
+[1m[31mE         + REGISTERED[0m
+
+[1m[31mtests/test_blackbox.py[0m:72: AssertionError
+[31m[1m____________________ test_ecp_some_prerequisites_completed _____________________[0m
+
+    [94mdef[39;49;00m [92mtest_ecp_some_prerequisites_completed[39;49;00m():[90m[39;49;00m
+        completed = {[33m"[39;49;00m[33mCS101[39;49;00m[33m"[39;49;00m}[90m[39;49;00m
+        required = {[33m"[39;49;00m[33mCS101[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mMATH101[39;49;00m[33m"[39;49;00m}[90m[39;49;00m
+    [90m[39;49;00m
+>       [94massert[39;49;00m prerequisites_satisfied(completed, required) [95mis[39;49;00m [94mFalse[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert True is False[0m
+[1m[31mE        +  where True = prerequisites_satisfied({'CS101'}, {'CS101', 'MATH101'})[0m
+
+[1m[31mtests/test_blackbox.py[0m:106: AssertionError
+[31m[1m_________________________ test_ecp15_bva18_course_full _________________________[0m
+
+    [94mdef[39;49;00m [92mtest_ecp15_bva18_course_full[39;49;00m():[90m[39;49;00m
+        student = Student(student_id=[33m"[39;49;00m[33mS01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+        course = Course([33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m, [94m3[39;49;00m, [94m30[39;49;00m, [94m30[39;49;00m)[90m[39;49;00m
+    [90m[39;49;00m
+>       [94massert[39;49;00m registration_decision(student, course) == [33m"[39;49;00m[33mWAITLISTED[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'WAITLISTED'[0m
+[1m[31mE         - WAITLISTED[0m
+[1m[31mE         + REGISTERED[0m
+
+[1m[31mtests/test_blackbox.py[0m:133: AssertionError
+[31m[1m_______________ test_bva_valid_current_credit_boundaries[BVA-04] _______________[0m
+
+current = 17, expected = True
+
+    [37m@pytest[39;49;00m.mark.parametrize([90m[39;49;00m
+        [33m"[39;49;00m[33mcurrent, expected[39;49;00m[33m"[39;49;00m,[90m[39;49;00m
+        [[90m[39;49;00m
+            ([94m0[39;49;00m, [94mTrue[39;49;00m),       [90m# BVA-02[39;49;00m[90m[39;49;00m
+            ([94m1[39;49;00m, [94mTrue[39;49;00m),       [90m# BVA-03[39;49;00m[90m[39;49;00m
+            ([94m17[39;49;00m, [94mTrue[39;49;00m),      [90m# BVA-04[39;49;00m[90m[39;49;00m
+            ([94m18[39;49;00m, [94mFalse[39;49;00m)      [90m# BVA-05: 18 + 1 exceeds the limit[39;49;00m[90m[39;49;00m
+        ],[90m[39;49;00m
+        ids=[[33m"[39;49;00m[33mBVA-02[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-03[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-04[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-05[39;49;00m[33m"[39;49;00m][90m[39;49;00m
+    )[90m[39;49;00m
+    [94mdef[39;49;00m [92mtest_bva_valid_current_credit_boundaries[39;49;00m(current, expected):[90m[39;49;00m
+>       [94massert[39;49;00m check_credit_limit(current, [94m1[39;49;00m) [95mis[39;49;00m expected[90m[39;49;00m
+[1m[31mE       assert False is True[0m
+[1m[31mE        +  where False = check_credit_limit(17, 1)[0m
+
+[1m[31mtests/test_blackbox.py[0m:204: AssertionError
+[31m[1m____________________ test_bva_combined_credit_limit[BVA-12] ____________________[0m
+
+current = 14, new = 4, expected = True
+
+    [37m@pytest[39;49;00m.mark.parametrize([90m[39;49;00m
+        [33m"[39;49;00m[33mcurrent, new, expected[39;49;00m[33m"[39;49;00m,[90m[39;49;00m
+        [[90m[39;49;00m
+            ([94m14[39;49;00m, [94m4[39;49;00m, [94mTrue[39;49;00m),     [90m# BVA-12[39;49;00m[90m[39;49;00m
+            ([94m15[39;49;00m, [94m3[39;49;00m, [94mTrue[39;49;00m),     [90m# BVA-13[39;49;00m[90m[39;49;00m
+            ([94m16[39;49;00m, [94m3[39;49;00m, [94mFalse[39;49;00m),    [90m# BVA-14[39;49;00m[90m[39;49;00m
+            ([94m17[39;49;00m, [94m1[39;49;00m, [94mTrue[39;49;00m),     [90m# BVA-15[39;49;00m[90m[39;49;00m
+            ([94m18[39;49;00m, [94m1[39;49;00m, [94mFalse[39;49;00m)     [90m# BVA-16[39;49;00m[90m[39;49;00m
+        ],[90m[39;49;00m
+        ids=[[33m"[39;49;00m[33mBVA-12[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-13[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-14[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-15[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-16[39;49;00m[33m"[39;49;00m][90m[39;49;00m
+    )[90m[39;49;00m
+    [94mdef[39;49;00m [92mtest_bva_combined_credit_limit[39;49;00m(current, new, expected):[90m[39;49;00m
+>       [94massert[39;49;00m check_credit_limit(current, new) [95mis[39;49;00m expected[90m[39;49;00m
+[1m[31mE       assert False is True[0m
+[1m[31mE        +  where False = check_credit_limit(14, 4)[0m
+
+[1m[31mtests/test_blackbox.py[0m:239: AssertionError
+[31m[1m____________________ test_bva_combined_credit_limit[BVA-13] ____________________[0m
+
+current = 15, new = 3, expected = True
+
+    [37m@pytest[39;49;00m.mark.parametrize([90m[39;49;00m
+        [33m"[39;49;00m[33mcurrent, new, expected[39;49;00m[33m"[39;49;00m,[90m[39;49;00m
+        [[90m[39;49;00m
+            ([94m14[39;49;00m, [94m4[39;49;00m, [94mTrue[39;49;00m),     [90m# BVA-12[39;49;00m[90m[39;49;00m
+            ([94m15[39;49;00m, [94m3[39;49;00m, [94mTrue[39;49;00m),     [90m# BVA-13[39;49;00m[90m[39;49;00m
+            ([94m16[39;49;00m, [94m3[39;49;00m, [94mFalse[39;49;00m),    [90m# BVA-14[39;49;00m[90m[39;49;00m
+            ([94m17[39;49;00m, [94m1[39;49;00m, [94mTrue[39;49;00m),     [90m# BVA-15[39;49;00m[90m[39;49;00m
+            ([94m18[39;49;00m, [94m1[39;49;00m, [94mFalse[39;49;00m)     [90m# BVA-16[39;49;00m[90m[39;49;00m
+        ],[90m[39;49;00m
+        ids=[[33m"[39;49;00m[33mBVA-12[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-13[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-14[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-15[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-16[39;49;00m[33m"[39;49;00m][90m[39;49;00m
+    )[90m[39;49;00m
+    [94mdef[39;49;00m [92mtest_bva_combined_credit_limit[39;49;00m(current, new, expected):[90m[39;49;00m
+>       [94massert[39;49;00m check_credit_limit(current, new) [95mis[39;49;00m expected[90m[39;49;00m
+[1m[31mE       assert False is True[0m
+[1m[31mE        +  where False = check_credit_limit(15, 3)[0m
+
+[1m[31mtests/test_blackbox.py[0m:239: AssertionError
+[31m[1m____________________ test_bva_combined_credit_limit[BVA-15] ____________________[0m
+
+current = 17, new = 1, expected = True
+
+    [37m@pytest[39;49;00m.mark.parametrize([90m[39;49;00m
+        [33m"[39;49;00m[33mcurrent, new, expected[39;49;00m[33m"[39;49;00m,[90m[39;49;00m
+        [[90m[39;49;00m
+            ([94m14[39;49;00m, [94m4[39;49;00m, [94mTrue[39;49;00m),     [90m# BVA-12[39;49;00m[90m[39;49;00m
+            ([94m15[39;49;00m, [94m3[39;49;00m, [94mTrue[39;49;00m),     [90m# BVA-13[39;49;00m[90m[39;49;00m
+            ([94m16[39;49;00m, [94m3[39;49;00m, [94mFalse[39;49;00m),    [90m# BVA-14[39;49;00m[90m[39;49;00m
+            ([94m17[39;49;00m, [94m1[39;49;00m, [94mTrue[39;49;00m),     [90m# BVA-15[39;49;00m[90m[39;49;00m
+            ([94m18[39;49;00m, [94m1[39;49;00m, [94mFalse[39;49;00m)     [90m# BVA-16[39;49;00m[90m[39;49;00m
+        ],[90m[39;49;00m
+        ids=[[33m"[39;49;00m[33mBVA-12[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-13[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-14[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-15[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-16[39;49;00m[33m"[39;49;00m][90m[39;49;00m
+    )[90m[39;49;00m
+    [94mdef[39;49;00m [92mtest_bva_combined_credit_limit[39;49;00m(current, new, expected):[90m[39;49;00m
+>       [94massert[39;49;00m check_credit_limit(current, new) [95mis[39;49;00m expected[90m[39;49;00m
+[1m[31mE       assert False is True[0m
+[1m[31mE        +  where False = check_credit_limit(17, 1)[0m
+
+[1m[31mtests/test_blackbox.py[0m:239: AssertionError
+[31m[1m_____________________ test_bva_capacity_boundaries[BVA-21] _____________________[0m
+
+capacity = 1, enrolled = 1, expected = 'WAITLISTED'
+
+    [37m@pytest[39;49;00m.mark.parametrize([90m[39;49;00m
+        [33m"[39;49;00m[33mcapacity, enrolled, expected[39;49;00m[33m"[39;49;00m,[90m[39;49;00m
+        [[90m[39;49;00m
+            ([94m30[39;49;00m, [94m29[39;49;00m, [33m"[39;49;00m[33mREGISTERED[39;49;00m[33m"[39;49;00m),    [90m# BVA-17[39;49;00m[90m[39;49;00m
+            ([94m1[39;49;00m, [94m0[39;49;00m, [33m"[39;49;00m[33mREGISTERED[39;49;00m[33m"[39;49;00m),      [90m# BVA-20[39;49;00m[90m[39;49;00m
+            ([94m1[39;49;00m, [94m1[39;49;00m, [33m"[39;49;00m[33mWAITLISTED[39;49;00m[33m"[39;49;00m)       [90m# BVA-21[39;49;00m[90m[39;49;00m
+        ],[90m[39;49;00m
+        ids=[[33m"[39;49;00m[33mBVA-17[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-20[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33mBVA-21[39;49;00m[33m"[39;49;00m][90m[39;49;00m
+    )[90m[39;49;00m
+    [94mdef[39;49;00m [92mtest_bva_capacity_boundaries[39;49;00m(capacity, enrolled, expected):[90m[39;49;00m
+        student = Student(student_id=[33m"[39;49;00m[33mS01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+        course = Course([33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m, [94m3[39;49;00m, capacity, enrolled)[90m[39;49;00m
+    [90m[39;49;00m
+>       [94massert[39;49;00m registration_decision(student, course) == expected[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'WAITLISTED'[0m
+[1m[31mE         - WAITLISTED[0m
+[1m[31mE         + REGISTERED[0m
+
+[1m[31mtests/test_blackbox.py[0m:257: AssertionError
+[31m[1m________________________ test_bva25_dt01_positive_dues _________________________[0m
+
+    [94mdef[39;49;00m [92mtest_bva25_dt01_positive_dues[39;49;00m():[90m[39;49;00m
+        student = Student(student_id=[33m"[39;49;00m[33mS01[39;49;00m[33m"[39;49;00m, outstanding_dues=[94m1[39;49;00m)[90m[39;49;00m
+        course = Course([33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m, [94m3[39;49;00m, [94m30[39;49;00m, [94m10[39;49;00m)[90m[39;49;00m
+    [90m[39;49;00m
+>       [94massert[39;49;00m registration_decision(student, course) == [33m"[39;49;00m[33mDUES_BLOCK[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'[0m
+[1m[31mE         - DUES_BLOCK[0m
+[1m[31mE         + REGISTERED[0m
+
+[1m[31mtests/test_blackbox.py[0m:266: AssertionError
+[31m[1m______________________________ test_dt_waitlisted ______________________________[0m
+
+    [94mdef[39;49;00m [92mtest_dt_waitlisted[39;49;00m():[90m[39;49;00m
+        student = Student(student_id=[33m"[39;49;00m[33mS01[39;49;00m[33m"[39;49;00m, current_credits=[94m10[39;49;00m)[90m[39;49;00m
+        course = Course([33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m, [94m3[39;49;00m, [94m30[39;49;00m, [94m30[39;49;00m)[90m[39;49;00m
+    [90m[39;49;00m
+>       [94massert[39;49;00m registration_decision(student, course) == [33m"[39;49;00m[33mWAITLISTED[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'WAITLISTED'[0m
+[1m[31mE         - WAITLISTED[0m
+[1m[31mE         + REGISTERED[0m
+
+[1m[31mtests/test_blackbox.py[0m:309: AssertionError
+[31m[1m_____________________ test_dt_dues_priority_over_duplicate _____________________[0m
+
+    [94mdef[39;49;00m [92mtest_dt_dues_priority_over_duplicate[39;49;00m():[90m[39;49;00m
+        student = Student([90m[39;49;00m
+            student_id=[33m"[39;49;00m[33mS01[39;49;00m[33m"[39;49;00m,[90m[39;49;00m
+            outstanding_dues=[94m1[39;49;00m,[90m[39;49;00m
+            registered_courses={[33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m}[90m[39;49;00m
+        )[90m[39;49;00m
+        course = Course([33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m, [94m3[39;49;00m, [94m30[39;49;00m, [94m10[39;49;00m)[90m[39;49;00m
+    [90m[39;49;00m
+>       [94massert[39;49;00m registration_decision(student, course) == [33m"[39;49;00m[33mDUES_BLOCK[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'ALREADY_REGISTERED' == 'DUES_BLOCK'[0m
+[1m[31mE         - DUES_BLOCK[0m
+[1m[31mE         + ALREADY_REGISTERED[0m
+
+[1m[31mtests/test_blackbox.py[0m:322: AssertionError
+[31m[1m_________ test_registration_decision_full_course_does_not_change_state _________[0m
+
+    [94mdef[39;49;00m [92mtest_registration_decision_full_course_does_not_change_state[39;49;00m():[90m[39;49;00m
+        student = Student([90m[39;49;00m
+            student_id=[33m"[39;49;00m[33mS01[39;49;00m[33m"[39;49;00m,[90m[39;49;00m
+            current_credits=[94m6[39;49;00m[90m[39;49;00m
+        )[90m[39;49;00m
+        course = Course([33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m, [94m3[39;49;00m, [94m30[39;49;00m, [94m30[39;49;00m)[90m[39;49;00m
+    [90m[39;49;00m
+        original_credits = student.current_credits[90m[39;49;00m
+        original_registered = student.registered_courses.copy()[90m[39;49;00m
+        original_enrolled = course.enrolled[90m[39;49;00m
+        original_waitlist = course.waitlist.copy()[90m[39;49;00m
+    [90m[39;49;00m
+        result = registration_decision(student, course)[90m[39;49;00m
+    [90m[39;49;00m
+>       [94massert[39;49;00m result == [33m"[39;49;00m[33mWAITLISTED[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'WAITLISTED'[0m
+[1m[31mE         - WAITLISTED[0m
+[1m[31mE         + REGISTERED[0m
+
+[1m[31mtests/test_blackbox.py[0m:409: AssertionError
+[31m[1m__________________ test_waitlisted_student_added_to_waitlist ___________________[0m
+
+    [94mdef[39;49;00m [92mtest_waitlisted_student_added_to_waitlist[39;49;00m():[90m[39;49;00m
+        student = Student(student_id=[33m"[39;49;00m[33mS01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+        course = Course([33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m, [94m3[39;49;00m, [94m30[39;49;00m, [94m30[39;49;00m)[90m[39;49;00m
+    [90m[39;49;00m
+        result = register_course(student, course)[90m[39;49;00m
+    [90m[39;49;00m
+>       [94massert[39;49;00m result == [33m"[39;49;00m[33mWAITLISTED[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'WAITLISTED'[0m
+[1m[31mE         - WAITLISTED[0m
+[1m[31mE         + REGISTERED[0m
+
+[1m[31mtests/test_blackbox.py[0m:438: AssertionError
+[31m[1m___________________ test_waitlisted_student_not_added_twice ____________________[0m
+
+    [94mdef[39;49;00m [92mtest_waitlisted_student_not_added_twice[39;49;00m():[90m[39;49;00m
+        student = Student(student_id=[33m"[39;49;00m[33mS01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+        course = Course([90m[39;49;00m
+            [33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m, [94m3[39;49;00m, [94m30[39;49;00m, [94m30[39;49;00m,[90m[39;49;00m
+            waitlist=[[33m"[39;49;00m[33mS01[39;49;00m[33m"[39;49;00m][90m[39;49;00m
+        )[90m[39;49;00m
+    [90m[39;49;00m
+        result = register_course(student, course)[90m[39;49;00m
+    [90m[39;49;00m
+>       [94massert[39;49;00m result == [33m"[39;49;00m[33mWAITLISTED[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 'REGISTERED' == 'WAITLISTED'[0m
+[1m[31mE         - WAITLISTED[0m
+[1m[31mE         + REGISTERED[0m
+
+[1m[31mtests/test_blackbox.py[0m:456: AssertionError
+[31m[1m_______________________ test_withdraw_registered_course ________________________[0m
+
+    [94mdef[39;49;00m [92mtest_withdraw_registered_course[39;49;00m():[90m[39;49;00m
+        student = Student([90m[39;49;00m
+            student_id=[33m"[39;49;00m[33mS01[39;49;00m[33m"[39;49;00m,[90m[39;49;00m
+            current_credits=[94m3[39;49;00m,[90m[39;49;00m
+            registered_courses={[33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m}[90m[39;49;00m
+        )[90m[39;49;00m
+    [90m[39;49;00m
+        course = Course([33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m, [94m3[39;49;00m, [94m30[39;49;00m, [94m10[39;49;00m)[90m[39;49;00m
+    [90m[39;49;00m
+        result = withdraw_course(student, course)[90m[39;49;00m
+    [90m[39;49;00m
+        [94massert[39;49;00m result [95mis[39;49;00m [94mTrue[39;49;00m[90m[39;49;00m
+        [94massert[39;49;00m [33m"[39;49;00m[33mCS201[39;49;00m[33m"[39;49;00m [95mnot[39;49;00m [95min[39;49;00m student.registered_courses[90m[39;49;00m
+        [94massert[39;49;00m student.current_credits == [94m0[39;49;00m[90m[39;49;00m
+>       [94massert[39;49;00m course.enrolled == [94m9[39;49;00m[90m[39;49;00m
+[1m[31mE       AssertionError: assert 10 == 9[0m
+[1m[31mE        +  where 10 = Course(code='CS201', credit_hours=3, capacity=30, enrolled=10, prerequisites=set(), waitlist=[]).enrolled[0m
+
+[1m[31mtests/test_blackbox.py[0m:531: AssertionError
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.11.7-final-0 ________________
+
+Name              Stmts   Miss Branch BrPart  Cover   Missing
+-------------------------------------------------------------
+registration.py      57      1     26      1    98%   54
+-------------------------------------------------------------
+TOTAL                57      1     26      1    98%
+[36m[1m=========================== short test summary info ============================[0m
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_ecp_positive_dues[0m - AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_ecp_some_prerequisites_completed[0m - AssertionError: assert True is False
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_ecp15_bva18_course_full[0m - AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_bva_valid_current_credit_boundaries[BVA-04][0m - assert False is True
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_bva_combined_credit_limit[BVA-12][0m - assert False is True
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_bva_combined_credit_limit[BVA-13][0m - assert False is True
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_bva_combined_credit_limit[BVA-15][0m - assert False is True
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_bva_capacity_boundaries[BVA-21][0m - AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_bva25_dt01_positive_dues[0m - AssertionError: assert 'REGISTERED' == 'DUES_BLOCK'
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_dt_waitlisted[0m - AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_dt_dues_priority_over_duplicate[0m - AssertionError: assert 'ALREADY_REGISTERED' == 'DUES_BLOCK'
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_registration_decision_full_course_does_not_change_state[0m - AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_waitlisted_student_added_to_waitlist[0m - AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_waitlisted_student_not_added_twice[0m - AssertionError: assert 'REGISTERED' == 'WAITLISTED'
+[31mFAILED[0m tests/test_blackbox.py::[1mtest_withdraw_registered_course[0m - AssertionError: assert 10 == 9
+[31m[31m[1m15 failed[0m, [32m46 passed[0m[31m in 0.71s[0m[0m

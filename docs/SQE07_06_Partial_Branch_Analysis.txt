@@ -1,0 +1,38 @@
+
+B2 - PARTIAL BRANCH COVERAGE ANALYSIS
+
+Initial branch coverage identified three missing branch outcomes.
+
+1. LINE 45 - OUTSTANDING DUES
+
+Missing branch: [45, 46]
+
+The condition student.outstanding_dues > 1000
+did not evaluate to True during the initial tests.
+Therefore, the DUES_BLOCK return statement was not executed.
+
+2. LINE 53 - COURSE CAPACITY
+
+Missing branch: [53, 54]
+
+The condition course.enrolled > course.capacity
+did not evaluate to True.
+The earlier capacity validation prevents this condition
+from being reached with valid course data.
+
+3. LINE 65 - WAITLIST INSERTION
+
+Missing branch: [65, 66]
+
+The condition for adding a student to the waitlist
+did not evaluate to True because the program did not
+produce a WAITLISTED decision.
+
+CONCLUSION
+
+Three branch outcomes were missing from the initial
+coverage measurement. These gaps are connected to the
+uncovered statements at lines 46, 54 and 66.
+
+Additional structural testing is needed to investigate
+these paths. The original source code remains unchanged.
